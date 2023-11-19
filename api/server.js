@@ -1,6 +1,7 @@
 const express = require("express");
 
 const Hobbits = require("./hobbits/hobbits-model.js");
+const db = require('../data/dbConfig.js')
 
 const server = express();
 
@@ -24,8 +25,8 @@ server.get("/hobbits/:id", (req, res) => {
   res.end()
 });
 
-server.post("/hobbits", (req, res) => {
-  res.end()
+server.post("/hobbits", async (req, res) => {
+  res.status(201).json(await Hobbits.insert(req.body)) 
 });
 
 server.delete("/hobbits/:id", (req, res) => {
